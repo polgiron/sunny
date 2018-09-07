@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.app.JobIntentService
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.View
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.paulgiron.supercoolapp.Fragments.ForecastListFragment
@@ -44,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 //        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
 
         locationButton.setOnClickListener { view ->
+            locationButton.setVisibility(View.GONE)
+            locationProgressBar.setVisibility(View.VISIBLE)
             askLocationPermission()
         }
     }
@@ -123,6 +126,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        locationButton.setVisibility(View.VISIBLE)
+        locationProgressBar.setVisibility(View.GONE)
         city.text = DownloadForecastAPI.city
         country.text = DownloadForecastAPI.country
         fragment.updateList()
