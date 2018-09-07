@@ -15,5 +15,6 @@ class Forecast(
     var air_pressure: Int,
     var humidity: Int,
 //    var visibility: Int = 0,
-    var predictability: Int
+    var predictability: Int,
+    var week_day: String
 ) { }

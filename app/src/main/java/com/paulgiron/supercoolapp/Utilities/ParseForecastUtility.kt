@@ -2,6 +2,10 @@ package com.paulgiron.supercoolapp.Utilities
 
 import android.util.Log
 import com.paulgiron.supercoolapp.Model.Forecast
+import khronos.Dates
+import khronos.days
+import khronos.plus
+import khronos.toString
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -12,6 +16,20 @@ class ParseForecastUtility {
 //        val jsonArray = JSONArray(jsonData)
 //        Log.i("TEST", jsonArray.toString())
         var forecastList: ArrayList<Forecast> = ArrayList()
+
+
+        val thirdDay = Dates.today + 2.days
+        val fourthDay = Dates.today + 3.days
+        val fifthDay = Dates.today + 4.days
+        val sixthDay = Dates.today + 5.days
+        val days = listOf<String>(
+            "Today",
+            "Tomorrow",
+            thirdDay.toString("EEEE"),
+            fourthDay.toString("EEEE"),
+            fifthDay.toString("EEEE"),
+            sixthDay.toString("EEEE")
+        )
 
         for (i in 0..(jsonArray.length() - 1)) {
             val jsonObject = jsonArray.getJSONObject(i)
@@ -31,8 +49,11 @@ class ParseForecastUtility {
                 jsonObject.getInt("air_pressure"),
                 jsonObject.getInt("humidity"),
 //                jsonObject.getInt("visibility"),
-                jsonObject.getInt("predictability")
+                jsonObject.getInt("predictability"),
+                days[i]
             )
+
+
 
 //            var forecast: Forecast = Forecast()
 //

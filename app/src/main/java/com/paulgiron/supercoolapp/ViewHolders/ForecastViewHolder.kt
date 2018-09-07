@@ -12,18 +12,10 @@ import khronos.toString
 import kotlinx.android.synthetic.main.recycler_view_item_forecast.view.*
 
 class ForecastViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    val thirdDay = today + 2.days
-    val fourthDay = today + 3.days
-    val fifthDay = today + 4.days
-    val sixthDay = today + 5.days
-    val days = listOf<String>("Today", "Tomorrow", thirdDay.toString("EEEE"), "Sunday", "Monday", "Tuesday")
-
     fun bind(requestManager: RequestManager, forecast: Forecast, index: Int) {
         view.description.text = forecast.weather_state_name
         view.temperature.text = forecast.the_temp.toString() + "°C"
-
-//        view.date.text = forecast.applicable_date
-        view.date.text = days[index]
+        view.date.text = forecast.week_day
 
         val forecastIcon = forecast.weather_state_abbr
 
