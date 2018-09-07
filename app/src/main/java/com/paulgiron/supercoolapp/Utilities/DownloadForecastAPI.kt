@@ -10,7 +10,7 @@ import com.paulgiron.supercoolapp.R.id.country
 import okhttp3.*
 import java.io.IOException
 
-class ServiceAPI : JobIntentService() {
+class DownloadForecastAPI : JobIntentService() {
     val client = OkHttpClient()
 
     companion object {
@@ -25,15 +25,15 @@ class ServiceAPI : JobIntentService() {
         fun onDownloadedWithData(list: List<Forecast>)
     }
 
-    override fun onHandleWork(p0: Intent) {
-        downloadData()
+    override fun onHandleWork(workIntent: Intent) {
+        val woeid: Int = workIntent.getIntExtra("woeid", 44418)
+        downloadData(woeid)
     }
 
-    private fun downloadData() {
+    private fun downloadData(woeid: Int) {
         val request = Request.Builder()
-//                .url("https://www.metaweather.com/api/location/2459115/2018/9/5/")
-//            .url("https://www.metaweather.com/api/location/2459115")
-            .url("https://www.metaweather.com/api/location/44418")
+            .url("https://www.metaweather.com/api/location/$woeid")
+//            .url("https://www.metaweather.com/api/location/44418")
             .build()
 //        val handler = Handler(Looper.getMainLooper())
 

@@ -12,6 +12,7 @@ class ForecastAdapter(val requestManager: RequestManager) : RecyclerView.Adapter
     private var forecastList: ArrayList<Forecast> = ArrayList()
 
     fun setData(dataList: ArrayList<Forecast>) {
+        forecastList.clear()
         forecastList.addAll(dataList)
         notifyDataSetChanged()
     }

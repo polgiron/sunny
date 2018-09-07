@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.paulgiron.supercoolapp.Adapters.ForecastAdapter
 import com.paulgiron.supercoolapp.R
-import com.paulgiron.supercoolapp.Utilities.ServiceAPI
+import com.paulgiron.supercoolapp.Utilities.DownloadForecastAPI
 import kotlinx.android.synthetic.main.fragment_forecast_list.*
 
 
@@ -27,6 +27,10 @@ class ForecastListFragment : Fragment() {
         recyclerViewForecastList.layoutManager = LinearLayoutManager(context)
         recyclerViewForecastList.adapter = adapter
 
-        adapter.setData(ServiceAPI.fetchedForecastList!!)
+        updateList()
+    }
+
+    fun updateList() {
+        adapter.setData(DownloadForecastAPI.fetchedForecastList!!)
     }
 }

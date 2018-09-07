@@ -6,7 +6,7 @@ import android.support.v4.app.JobIntentService
 import android.support.v7.app.AppCompatActivity
 import com.paulgiron.supercoolapp.Model.Forecast
 import com.paulgiron.supercoolapp.R
-import com.paulgiron.supercoolapp.Utilities.ServiceAPI
+import com.paulgiron.supercoolapp.Utilities.DownloadForecastAPI
 
 class SplashscreenActivity : AppCompatActivity() {
     val JOB_ID = 1000
@@ -15,7 +15,7 @@ class SplashscreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splashscreen)
 
-        ServiceAPI.listener = object : ServiceAPI.Listener {
+        DownloadForecastAPI.listener = object : DownloadForecastAPI.Listener {
             override fun onDownloaded() {
                 startActivity(Intent(this@SplashscreenActivity, MainActivity::class.java))
                 finish()
@@ -27,9 +27,9 @@ class SplashscreenActivity : AppCompatActivity() {
         }
 
         val serviceIntent = Intent().apply {
-//            putExtra("download_url", dataUrl)
+            putExtra("woeid", 44418)
         }
 
-        JobIntentService.enqueueWork(baseContext, ServiceAPI::class.java, JOB_ID, serviceIntent)
+        JobIntentService.enqueueWork(baseContext, DownloadForecastAPI::class.java, JOB_ID, serviceIntent)
     }
 }
